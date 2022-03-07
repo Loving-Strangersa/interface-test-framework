@@ -6,3 +6,17 @@ proxies:
   http: 127.0.0.1:8888
   https: 127.0.0.1:8888
 
+
+mysql:
+  host: pass
+  username: pass
+  password: pass
+  port: pass
+
+log:
+  name: interface
+  level: INFO
+  file_name: 日志
+  file_ok: True
+
+
