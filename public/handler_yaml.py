@@ -1,10 +1,11 @@
 from ruamel import yaml
+from abs_path import config_path
 
 
 class Yaml(object):
 
     @staticmethod
-    def read_yaml(path: str):
+    def read_yaml(path: str = config_path):
         """
         读取yaml文件数据
         :param path: 文件路径
@@ -16,7 +17,9 @@ class Yaml(object):
             return yaml.load(f.read(), Loader=yaml.Loader)
 
 
-handle_yaml = Yaml
+YamlClient = Yaml
 
 if __name__ == '__main__':
-    print(handle_yaml.read_yaml("../config/config.yaml"))
+    print(YamlClient.read_yaml("../config/config.yaml"))
+    mysql_data = YamlClient.read_yaml("../config/config.yaml")["mysql"]
+    print(mysql_data)

@@ -3,8 +3,7 @@ import json as system_json
 import allure
 import requests
 from public.random_data import counterfeit
-from public.handler_yaml import handle_yaml
-from abs_path import config_path
+from public.handler_yaml import YamlClient
 
 
 class Request(object):
@@ -13,7 +12,7 @@ class Request(object):
         requests.packages.urllib3.disable_warnings()
 
         self.user_agent = counterfeit.random_user_agent()
-        self.base_url = handle_yaml.read_yaml(config_path)["config"]["domain"]
+        self.base_url = YamlClient.read_yaml()["config"]["domain"]
 
     @staticmethod
     def allure_data(**kwargs):
@@ -66,7 +65,7 @@ class Request(object):
         :return: 返回http和https代理配置
         :rtype: dict
         """
-        config = handle_yaml.read_yaml(config_path)
+        config = YamlClient.read_yaml()
         if config["config"]["proxies"]:
             return config["proxies"]
         return False

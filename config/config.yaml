@@ -8,10 +8,17 @@ proxies:
 
 
 mysql:
-  host: pass
-  username: pass
-  password: pass
-  port: pass
+  host: "127.1.0.1"
+  user: "root"
+  password: "root"
+  port: 3306
+  database: "mysql"
+
+ssh:
+  hostname: "47.107.45.202"
+  username: root
+  password: nightfell1.
+  port: 22
 
 log:
   name: interface
