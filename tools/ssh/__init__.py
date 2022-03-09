@@ -32,7 +32,7 @@ class SSLClient(object):
         self.client.close()
         return stdout.read().decode('utf-8')
 
-    def upload_file(self, local_path, remote_path):
+    def upload_file(self, local_path: str, remote_path: str):
         """
         上传文件到服务器
         :param local_path:本地文件目录
@@ -49,7 +49,7 @@ class SSLClient(object):
         sftp.put(local_path, remote_path)
         tran.close()
 
-    def read_server_file(self, file_path):
+    def read_server_file(self, file_path: str):
         """
         读取服务器文件
         :param file_path:
@@ -65,7 +65,7 @@ class SSLClient(object):
         finally:
             remote_file.close()
 
-    def download_file(self, local_path, remote_path):
+    def download_file(self, local_path: str, remote_path: str):
         """
         下載文件到本地
         :param local_path:本地文件目录
