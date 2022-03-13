@@ -1,6 +1,7 @@
 import paramiko
 from public.handler_yaml import YamlClient
 from abs_path import config_path
+from public.log import Log
 
 
 class SSLClient(object):
@@ -13,12 +14,16 @@ class SSLClient(object):
             "password": password or data["password"],
             "port": port or data["port"]
         }
+        Log.info("连接服务器信息:", **self.config)
         try:
             self.client = paramiko.SSHClient()
             self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             self.client.connect(**self.config)
         except paramiko.ssh_exception.SSHException as e:
             raise ValueError(f"连接服务器失败：{e}，massage：{self.config}")
+
+    def __del__(self):
+        self.client.close()
 
     def execute(self, command: str):
         """
@@ -29,7 +34,6 @@ class SSLClient(object):
         :rtype: str
         """
         stdin, stdout, stderr = self.client.exec_command(command)
-        self.client.close()
         return stdout.read().decode('utf-8')
 
     def upload_file(self, local_path: str, remote_path: str):
@@ -83,4 +87,4 @@ class SSLClient(object):
 
 if __name__ == '__main__':
     s = SSLClient()
-    print(s.execute("ls"))
+    print(s.execute("pwd"))
