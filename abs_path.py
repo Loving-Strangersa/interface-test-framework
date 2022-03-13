@@ -13,6 +13,3 @@ log_path = os.path.join(dir_path, "config", "log")
 
 # 本地时间戳
 time_now = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())
-
-
-print(time_now)
