@@ -1,6 +1,7 @@
 import pymysql
 from public.handler_yaml import YamlClient
 from abs_path import config_path
+from public.log import Log
 
 
 class MySQLClient(object):
@@ -21,14 +22,18 @@ class MySQLClient(object):
         """
         data = YamlClient.read_yaml(config_path)["mysql"]
 
+        self.config = {
+            "host": host or data["host"],
+            "port": port or data["port"],
+            "user": user or data["user"],
+            "passwd": password or data["password"],
+            "database": database or data["database"],
+            "charset": "utf8mb4",
+            "cursorclass": data.get("is_dict") or pymysql.cursors.DictCursor
+        }
+        Log.info("连接MySQL信息:"**self.config)
         self.connect = pymysql.connect(
-            host=host or data["host"],
-            port=port or data["port"],
-            user=user or data["user"],
-            passwd=password or data["password"],
-            database=database or data["database"],
-            charset="utf8mb4",
-            cursorclass=data.get("is_dict") or pymysql.cursors.DictCursor
+            **self.config
         )
 
         self.cur = self.connect.cursor()
