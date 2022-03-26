@@ -23,7 +23,7 @@ ssh:
 log:
   name: interface
   level: INFO
-  file_name: 日志
+  file_name: .log
   file_ok: True
 
 

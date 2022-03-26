@@ -13,7 +13,7 @@ class Yaml(object):
         :return: yaml文件数据
         :rtype:
         """
-        with open(path, "r") as f:
+        with open(path, "r", encoding="utf-8") as f:
             return yaml.load(f.read(), Loader=yaml.Loader)
 
 
