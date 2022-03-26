@@ -31,3 +31,6 @@ if YamlClient.read_yaml()["log"]["file_ok"]:
     file = os.path.join(log_path, time_now + YamlClient.read_yaml()["log"]['file_name'])
 
 Log = LogClient(file)
+
+if __name__ == '__main__':
+    print(Log.__dict__.get("handlers"))
