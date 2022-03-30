@@ -3,8 +3,8 @@ import os
 import pytest
 
 import requests
-
-from public.get_file_name import file_name
+from public.handler_yaml import YamlClient
+from api import Data
 
 
 @pytest.fixture(scope="function", autouse=True)
@@ -15,7 +15,7 @@ def init():
     :return:
     """
     requests.packages.urllib3.disable_warnings()
-    file_name("./KeywordDriven/case")
+
 
 def pytest_collection_modifyitems(items):
     current_path = os.path.abspath(".")
@@ -26,6 +26,12 @@ def pytest_collection_modifyitems(items):
         tdata_path = os.path.join(current_path, tdata_temp.replace(".py", ".yaml"))
 
         if os.path.isfile(tdata_path):
-            pass
+            tdata_name = "tdata" + item.name[4:]
+            try:
+                case_data = YamlClient.read_yaml(tdata_path)[tdata_name]
+                setattr(Data, "case_data", case_data)
+            except KeyError:
+                raise KeyError(f"{item.name}yaml没有找到对应的tdata")
+
         else:
             raise ValueError(f"{case_file}文件没有找到对应的tdata数据文件")
