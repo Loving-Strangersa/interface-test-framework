@@ -2,8 +2,9 @@ import json as system_json
 
 import allure
 import requests
-from public.random_data import counterfeit
+
 from public.handler_yaml import YamlClient
+from public.random_data import faker
 
 
 class Request(object):
@@ -11,7 +12,7 @@ class Request(object):
     def __init__(self):
         requests.packages.urllib3.disable_warnings()
 
-        self.user_agent = counterfeit.random_user_agent
+        self.user_agent = faker.random_user_agent
         self.base_url = YamlClient.read_yaml()["config"]["domain"]
 
     @staticmethod
