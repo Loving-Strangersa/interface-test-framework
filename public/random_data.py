@@ -1,3 +1,5 @@
+import random
+
 from faker import Faker
 
 
@@ -27,7 +29,7 @@ class RandomData(object):
     @property
     def random_name(self):
         """
-        随机生成姓名
+        随机生成中文姓名
         :return:
         :rtype:
         """
@@ -42,8 +44,26 @@ class RandomData(object):
         """
         return self.faker.free_email()
 
+    @property
+    def random_username(self):
+        """
+        随机生成英文用户名
+        :return:
+        :rtype:
+        """
+        return self.faker.user_name()
 
-counterfeit = RandomData()
+    @property
+    def random_password(self):
+        """
+        随机生成密码
+        :return:
+        :rtype:
+        """
+        return self.faker.password(length=random.randint(5, 31))
+
+
+faker = RandomData()
 
 if __name__ == '__main__':
-    print(counterfeit.random_user_agent)
+    print(faker.random_username)
