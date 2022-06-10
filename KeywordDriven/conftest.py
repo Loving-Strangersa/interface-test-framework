@@ -11,7 +11,6 @@ def init():
     :return:
     """
     requests.packages.urllib3.disable_warnings()
-    # file_name("./KeywordDriven/test")
 
 
 def pytest_collection_modifyitems(items):

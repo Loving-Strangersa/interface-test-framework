@@ -7,6 +7,7 @@
 import allure
 
 from KeywordDriven.ApiHandle.handle_user import UserClient
+from KeywordDriven.tdata import fresh_parse_data
 
 
 # TODO:暂时省略获取yaml存取的参数,并返回数据
@@ -14,10 +15,12 @@ from KeywordDriven.ApiHandle.handle_user import UserClient
 
 class StepUser(UserClient):
 
-    @allure.step("用户登录")
-    def step_user_login(self, selector):
-        result = self.user_login(params=selector)
-
     @allure.step("用户注册")
     def step_user_register(self, selector):
-        result = self.user_register(params=selector)
+        config = fresh_parse_data(selector)
+        result = self.user_register(config)
+
+    @allure.step("用户登录")
+    def step_user_login(self, selector):
+        config = fresh_parse_data(selector)
+        result = self.user_login(config)
