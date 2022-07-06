@@ -13,7 +13,8 @@ class UserClient(ApiClient, UserClient):
         :return:
         """
         result = self._convert_user_login(params)
-        return self.login(result)
+        response = self.login(result)
+        assert response["message"] == "恭喜你登录成功"
 
     def user_register(self, params):
         """
@@ -26,4 +27,7 @@ class UserClient(ApiClient, UserClient):
         :return:
         """
         result = self._convert_user_register(params)
-        return self.register(result)
+        response = self.register(result)
+        assert response["message"] == "恭喜你注册成功"
+        response.update(result)
+        return response

@@ -1,4 +1,5 @@
 import random
+import string
 
 from faker import Faker
 
@@ -47,20 +48,20 @@ class RandomData(object):
     @property
     def random_username(self):
         """
-        随机生成英文用户名
+        随机生成英文+数字用户名1-4位
         :return:
         :rtype:
         """
-        return self.faker.user_name()
+        return string.hexdigits[0:random.randint(2, 4)]
 
     @property
     def random_password(self):
         """
-        随机生成密码
+          随机生成英文+数字密码6-12
         :return:
         :rtype:
         """
-        return self.faker.password(length=random.randint(5, 31))
+        return "".join([random.choice(string.hexdigits) for _ in range(6, 12)])
 
 
 faker = RandomData()
