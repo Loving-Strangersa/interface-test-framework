@@ -1,38 +1,36 @@
 # 接口测试框架
 
 #### 介绍
+
 支持数据驱动，关键字驱动
 
 #### 软件架构
-软件架构说明
 
+python +request+ pytest +pymysql
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. 项目下载到本地后 终端执行安装第三方库 pip install  -r requirements.txt
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+~~~tex
+规范说明:
 
-#### 参与贡献
+1、路由层进行接口定义，定义接口路径，接口传参方式，json/params/data... 
+	KeywordDriven/api/api.py
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+2、base层进行数据处理，数据过滤，逻辑判断。如果是必须填写的参数使用字典中的[]进行获取,不是必填参数使用config.get("params","params_xxx") 使用默认参数站位
+	KeywordDriven/ApiHandle/base.py
 
+3、pp层进行接口返回数据处理 使用静态方法对返回值的code码校验，逻辑尽量写到base层中进行处理
+	KeywordDriven/ApiHandle/handle_user.py
 
-#### 特技
+4、init中暴露 KeywordDriven/ApiHandle/handle_user.py里的方法
+	KeywordDriven/ApiHandle/__init__.py
 
+5、step层不能出现逻辑判断，只能进行传递参数，控制要出现的参数返回到test层
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+6、编写测试用例，进行数据的更新，数据引用
+~~~
+

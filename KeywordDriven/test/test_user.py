@@ -10,7 +10,7 @@ from KeywordDriven.step.step_user import StepUser
 from public.random_data import faker
 
 
-# TODO 进行step数据串联
+# TODO 待进行step数据串联
 class TestUser(StepUser):
 
     @allure.title("用户正常登录")

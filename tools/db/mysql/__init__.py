@@ -7,13 +7,13 @@ from public.log import Log
 
 class MySQLClient(object):
 
-    def __init__(self, host=None, database=None, user="root", password=None, port=None):
+    def __init__(self, host=None, database=None, password=None, user="root", port=3306):
         """
 
         :param host: 数据库地址
         :type host: str
-        :param database: 数据库库名
-        :type database: str
+        :param configbase: 数据库库名
+        :type configbase: str
         :param user: 登录名称
         :type user: str
         :param password: 登录密码
@@ -21,18 +21,18 @@ class MySQLClient(object):
         :param port: 数据库开放端口号
         :type port: number
         """
-        data = YamlClient.read_yaml(config_path)["mysql"]
+        config = YamlClient.read_yaml(config_path)["mysql"]
 
         self.config = {
-            "host": host or data["host"],
-            "port": port or data["port"],
-            "user": user or data["user"],
-            "passwd": password or data["password"],
-            "database": database or data["database"],
+            "host": host or config["host"],
+            "port": port or config["port"],
+            "user": user or config["user"],
+            "passwd": password or config["password"],
+            "database": database or config["database"],
             "charset": "utf8mb4",
-            "cursorclass": data.get("is_dict") or pymysql.cursors.DictCursor
+            "cursorclass": config.get("is_dict") or pymysql.cursors.DictCursor
         }
-        Log.info("连接MySQL信息:"**self.config)
+        Log.info("连接MySQL信息:{}".format(self.config))
         self.connect = pymysql.connect(
             **self.config
         )
@@ -59,7 +59,7 @@ class MySQLClient(object):
 
 
 if __name__ == '__main__':
-    a = MySQLClient()
+    a = MySQLClient("47.107.45.202")
     # print(    sql.execute("show databases"))
     # print(sql.execute("show tables"))
     print(a.execute("select * from db"))

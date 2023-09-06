@@ -4,6 +4,15 @@ from KeywordDriven.api.api import ApiClient
 
 class UserClient(ApiClient, UserClient):
 
+    @staticmethod
+    def _check_response_positive(response):
+        """
+        校验接口数据返回值
+        :param response:
+        :return:
+        """
+        assert response["success"] == 1
+
     def user_login(self, params):
         """
         用户登录

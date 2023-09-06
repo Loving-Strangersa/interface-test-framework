@@ -15,7 +15,7 @@ class SSLClient(object):
             "password": password or data["password"],
             "port": port or data["port"]
         }
-        Log.info("连接服务器信息:", **self.config)
+        Log.info("连接服务器信息:{}".format(self.config))
         try:
             self.client = paramiko.SSHClient()
             self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -88,4 +88,4 @@ class SSLClient(object):
 
 if __name__ == '__main__':
     s = SSLClient()
-    print(s.execute("pwd"))
+    print(s.execute("cd /;ls"))
