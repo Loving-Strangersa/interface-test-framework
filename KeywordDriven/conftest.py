@@ -11,7 +11,6 @@ def init():
     :return:
     """
     requests.packages.urllib3.disable_warnings()
-    # file_name("./KeywordDriven/test")
 
 
 def pytest_collection_modifyitems(items):
@@ -21,6 +20,6 @@ def pytest_collection_modifyitems(items):
         case_file = os.path.basename(case_path)
         tdata_temp = case_file.replace("test", "tdata")
         dir_path = os.path.dirname(case_path)
-        tdata_path = os.path.join(dir_path, tdata_temp.replace(".py", ".yaml"))
+        tdata_path = os.path.join(dir_path, tdata_temp.replace("test", "tdata"))
         if not os.path.exists(tdata_path):
             raise ValueError(f"{case_file}文件没有找到对应的tdata数据文件")

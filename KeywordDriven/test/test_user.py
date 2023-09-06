@@ -1,12 +1,7 @@
-# -*- coding: utf-8 -*-
-# @Time    : 2022/05/18
-# @Author  : chron
-# @FileName: test_user.py 
-# @Software: PyCharm 
-# @E-mail  : chron@foxmil.com
 import allure
 
 from KeywordDriven.step.step_user import StepUser
+
 from public.random_data import faker
 
 

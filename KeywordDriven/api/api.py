@@ -4,11 +4,11 @@ from KeywordDriven.base.base_user import BaseClient
 class ApiClient(BaseClient):
 
     def login(self, params):
-        api_url = "/api/login"
+        api_url = "/api/user/login"
         response = self.post(url=self.host + api_url, json=params)
         return response.json()
 
     def register(self, params):
-        api_url = "/api/register"
+        api_url = "/api/user/register"
         response = self.post(url=self.host + api_url, json=params)
         return response.json()
