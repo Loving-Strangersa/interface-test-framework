@@ -2,7 +2,7 @@ from KeywordDriven.ApiHandle.base import Client as UserClient
 from KeywordDriven.api.api import ApiClient
 
 
-class UserClient(ApiClient, UserClient):
+class User(ApiClient, UserClient):
 
     @staticmethod
     def _check_response_positive(response):
@@ -13,7 +13,7 @@ class UserClient(ApiClient, UserClient):
         """
         assert response["success"] == 1
 
-    def user_login(self, params):
+    def _user_login(self, params):
         """
         用户登录
         :param params:
@@ -24,7 +24,7 @@ class UserClient(ApiClient, UserClient):
         result = self._convert_user_login(params)
         return self.login(result)
 
-    def user_register(self, params):
+    def _user_register(self, params):
         """
         用户注册
         :param params:
@@ -35,4 +35,5 @@ class UserClient(ApiClient, UserClient):
         :return:
         """
         result = self._convert_user_register(params)
-        return self.register(result)
+        response = self.register(result)
+        return {"message": response["message"]}
