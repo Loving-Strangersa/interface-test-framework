@@ -1,5 +1,6 @@
 import random
 import string
+import time
 
 from faker import Faker
 
@@ -63,8 +64,17 @@ class RandomData(object):
         """
         return "".join([random.choice(string.hexdigits) for _ in range(6, 12)])
 
+    @staticmethod
+    def get_time(length=None):
+        """
+        获取时间戳
+        :return:
+        :rtype:
+        """
+        return time.time() * 1000[:length] if length else time.time() * 1000
+
 
 faker = RandomData()
 
 if __name__ == '__main__':
-    print(faker.random_username)
+    print(faker.get_time(6))

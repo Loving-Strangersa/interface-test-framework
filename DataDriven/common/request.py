@@ -33,17 +33,15 @@ class Request(object):
         allure.attach(str(kwargs["status_code"]), "反回状态码", allure.attachment_type.TEXT)
         allure.attach(kwargs["response"], "响应结果", allure.attachment_type.TEXT)
 
-    def __header(self, token=None):
+    def __header(self, headers: dict):
         """
         处理请求头,支持传入token
-        :param token: 处理token
-        :type token: str
-        :return: 返回请求头
-        :rtype: dict
+        :param headers:
+        :return:
         """
         header = {'User-Agent': self.user_agent}
-        if token:
-            header["token"] = token
+        if headers:
+            header.update(headers)
         return header
 
     def __url(self, url: str):

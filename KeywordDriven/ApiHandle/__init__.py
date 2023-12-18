@@ -1,10 +1,13 @@
-from KeywordDriven.ApiHandle.handle_user import User
+from KeywordDriven.ApiHandle.handle_movie import Movie
 
 
-class UserClient(User):
+class MovieClient(Movie):
 
-    def user_login(self, params):
-        return self._user_login(params)
+    def get_location_information(self, params):
+        return self._get_location_information(params)
 
-    def user_register(self, params):
-        return self._user_register(params)
+    def get_popular_searches(self, params):
+        return self._get_popular_searches(params)
+
+    def keyword_association(self, params):
+        return self._keyword_association(params)

@@ -1,6 +1,6 @@
-from _pytest.monkeypatch import MonkeyPatch
+from functools import wraps
 
-from KeywordDriven.api import Data
+from _pytest.monkeypatch import MonkeyPatch
 
 
 class Env(object):
@@ -21,22 +21,21 @@ monkeypatch = MonkeyPatch()
 
 
 def fresh_parse_data(func):
+    wraps(func)
+
     def function(*args):
         result = func(*args)
-        params = []
-        for index in range(len(args)):
-            if isinstance(args[index], dict):
-                for key, value in args[index].items():
-                    if key[0] == "!":
-                        pass
-                        # {key[1:]:}
-
         e.__setattr__(func.__name__, result)
         return result
 
     return function
 
 
+def get_env_data(func_name):
+    result = e.__getattribute__(func_name)
+    return result
+
+
 if __name__ == '__main__':
-    setattr(Data, "case_data", {"a": {"b": 1}})
+    setattr(Env, "case_data", {"a": {"b": 1}})
     # print(fresh_parse_data("a b"))
