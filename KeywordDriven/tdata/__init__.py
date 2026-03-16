@@ -21,18 +21,28 @@ monkeypatch = MonkeyPatch()
 
 
 def fresh_parse_data(func):
-    wraps(func)
-
-    def function(*args):
-        result = func(*args)
+    @wraps(func)
+    def function(*args, **kwargs):
+        result = func(*args, **kwargs)
         e.__setattr__(func.__name__, result)
         return result
 
     return function
 
 
-def get_env_data(func_name):
-    result = e.__getattribute__(func_name)
+# def fresh_parse_data(func):
+#     wraps(func)
+#
+#     def function(*args):
+#         result = func(*args)
+#         e.__setattr__(func.__name__, result)
+#         return result
+#
+#     return function
+
+
+def get_env_data(name):
+    result = e.__getattribute__(name)
     return result
 
 

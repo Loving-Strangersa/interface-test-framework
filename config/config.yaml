@@ -1,6 +1,10 @@
 config:
-  domain: https://mgw.lovev.com
+  domain: http://sales.wxdev.com:2086
   proxies: True
+  code_address: http://36.155.98.104:49880/mtv/v1/smsMt/querySmsMt?pageNum=1&pageSize=20
+  Super_administrator:
+    username: super
+    password: mgHg2022!11
 
 proxies:
   http: 127.0.0.1:8888
@@ -15,10 +19,10 @@ mysql:
   database: "mysql"
 
 ssh:
-  hostname: "47.107.45.202"
-  username: root
-  password: nightfell1.
-  port: 22
+  hostname:
+  username:
+  password:
+  port:
 
 log:
   name: interface
